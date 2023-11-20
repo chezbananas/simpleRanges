@@ -23,8 +23,4 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'center',
   },
-  logo: {
-    height: 128,
-    width: 128,
-  }
 });

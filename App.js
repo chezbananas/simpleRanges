@@ -7,9 +7,8 @@ import {
   Image,
   Dimensions,
   ScrollView,
-  Button,
 } from 'react-native';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { AntDesign } from '@expo/vector-icons';
 import Images from './assets/index.js';
 
@@ -17,14 +16,19 @@ export default function App() {
   const [currPlayers, setPlayers] = useState(9);
   const [currPosition, setPosition] = useState(1);
   const [currStage, setStage] = useState(0);
-  const maxStage = Object.keys(Images[currPosition]).length - 1;
+  let stageText = Images[currPosition]['stages'][currStage];
+  let positionText = Images[currPosition]['pos'];
+  const maxStage = Object.keys(Images[currPosition]).length - 3;
   let currImage = Images[currPosition][currStage];
-  const imgWidth = Dimensions.get('window').width * 0.9;
-  const imgHeight = Dimensions.get('window').width * 0.9 * 2.84; // aspect ratio for all images
+  const imgWidth = Math.min(Dimensions.get('window').width * 0.9, 400);
+  const imgHeight = imgWidth * 2.84; // aspect ratio for all images
 
   return (
     <SafeAreaView style={styles.container}>
-      <SafeAreaView style={styles.header}>
+      <View style={styles.header}>
+        <View style={styles.positionContainer}>
+          <Text style={styles.positionText}> {positionText} </Text>
+        </View>
         <Pressable
           onPress={() => {
             const newPlayers = Math.max(currPlayers - 1, 2);
@@ -39,7 +43,10 @@ export default function App() {
         <Pressable onPress={() => setPlayers(Math.min(currPlayers + 1, 9))}>
           <AntDesign name="pluscircle" size={36} color="black" />
         </Pressable>
-      </SafeAreaView>
+        <View style={styles.positionContainer}>
+          <Text style={styles.positionText}> {stageText} </Text>
+        </View>
+      </View>
       <SafeAreaView style={styles.secondHeader}>
         <Pressable
           style={styles.buttonStyle}
@@ -60,7 +67,7 @@ export default function App() {
         </Pressable>
         <Pressable
           style={styles.buttonStyle}
-          onPress={() => setStage(Math.min(currStage + 1, maxStage))}>
+          onPress= {() => setStage(Math.min(currStage + 1, maxStage))}          >
           <Text style={styles.buttonText}> Next Stage </Text>
         </Pressable>
         <Pressable
@@ -96,11 +103,21 @@ const styles = StyleSheet.create({
   },
   header: {
     flexDirection: 'row',
-    justifyContent: 'center',
-    marginBottom: "2%",
+    justifyContent: 'space-between',
+    marginBottom: '2%',
+    width: '100%',
   },
   playerText: {
     fontSize: 30,
+  },
+  positionContainer: {
+    width: '25%',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  positionText: {
+    fontSize: 12,
   },
   secondHeader: {
     height: '5%',
