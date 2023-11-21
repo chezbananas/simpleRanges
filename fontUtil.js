@@ -1,8 +1,9 @@
 import { Dimensions } from "react-native";
-const { width, height } = Dimensions.get("window");
+const width = Math.min(Dimensions.get("window").width * 0.9, 600);
+const height = imgWidth * 2.84; // aspect ratio for all images
 
-const guidelineBaseWidth = 500;
-const guidelineBaseHeight = 1420;
+const guidelineBaseWidth = 300;
+const guidelineBaseHeight = 850;
 
 const scale = (size) => (width / guidelineBaseWidth) * size;
 const verticalScale = (size) => (height / guidelineBaseHeight) * size;
