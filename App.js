@@ -26,7 +26,7 @@ export default function App() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={[styles.header, { width: imgWidth * 1.5 }]}>
+      <View style={[styles.header, { width: imgWidth * 1.05 }]}>
         <View style={styles.positionContainer}>
           <Text style={{ fontSize: 15 }}> {positionText} </Text>
         </View>
@@ -49,7 +49,7 @@ export default function App() {
           <Text style={{ fontSize: 15 }}> {stageText} </Text>
         </View>
       </View>
-      <SafeAreaView style={[styles.secondHeader, { width: imgWidth * 1.5 }]}>
+      <SafeAreaView style={[styles.secondHeader, { width: imgWidth * 1.05 }]}>
         <Pressable
           style={styles.buttonStyle}
           onPress={() => {
