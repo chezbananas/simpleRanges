@@ -7,10 +7,12 @@ import {
   Image,
   Dimensions,
   ScrollView,
+  PixelRatio,
 } from "react-native";
 import { useState } from "react";
 import { AntDesign } from "@expo/vector-icons";
 import Images from "./assets/index.js";
+import { scale } from "./fontUtil.js";
 
 export default function App() {
   const [currPlayers, setPlayers] = useState(9);
@@ -27,7 +29,7 @@ export default function App() {
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
         <View style={styles.positionContainer}>
-          <Text style={styles.positionText}> {positionText} </Text>
+          <Text style={{ fontSize: scale(15) }}> {positionText} </Text>
         </View>
         <Pressable
           onPress={() => {
@@ -40,7 +42,7 @@ export default function App() {
         >
           <AntDesign name="minuscircle" size={36} color="black" />
         </Pressable>
-        <Text style={styles.playerText}> {currPlayers} </Text>
+        <Text style={{ fontSize: scale(30) }}> {currPlayers} </Text>
         <Pressable onPress={() => setPlayers(Math.min(currPlayers + 1, 9))}>
           <AntDesign name="pluscircle" size={36} color="black" />
         </Pressable>
@@ -109,20 +111,14 @@ const styles = StyleSheet.create({
   header: {
     flexDirection: "row",
     justifyContent: "space-between",
-    marginBottom: "2%",
+    marginBottom: 5,
     width: "100%",
-  },
-  playerText: {
-    fontSize: 30,
   },
   positionContainer: {
     width: "25%",
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
-  },
-  positionText: {
-    fontSize: 12,
   },
   secondHeader: {
     height: "5%",
