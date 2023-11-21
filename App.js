@@ -22,12 +22,12 @@ export default function App() {
   let positionText = Images[currPosition]["pos"];
   const maxStage = Object.keys(Images[currPosition]).length - 3;
   let currImage = Images[currPosition][currStage];
-  const imgWidth = Math.min(Dimensions.get("window").width * 0.9, 400);
+  const imgWidth = Math.min(Dimensions.get("window").width * 0.9, 600);
   const imgHeight = imgWidth * 2.84; // aspect ratio for all images
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.header}>
+      <View style={[styles.header, { width: imgWidth }]}>
         <View style={styles.positionContainer}>
           <Text style={{ fontSize: scale(15) }}> {positionText} </Text>
         </View>
@@ -47,10 +47,10 @@ export default function App() {
           <AntDesign name="pluscircle" size={36} color="black" />
         </Pressable>
         <View style={styles.positionContainer}>
-          <Text style={styles.positionText}> {stageText} </Text>
+          <Text style={{ fontSize: scale(15) }}> {stageText} </Text>
         </View>
       </View>
-      <SafeAreaView style={styles.secondHeader}>
+      <SafeAreaView style={[styles.secondHeader, { width: imgWidth }]}>
         <Pressable
           style={styles.buttonStyle}
           onPress={() => {
@@ -112,7 +112,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     marginBottom: 5,
-    width: "100%",
   },
   positionContainer: {
     width: "25%",
@@ -122,7 +121,6 @@ const styles = StyleSheet.create({
   },
   secondHeader: {
     height: "5%",
-    width: "100%",
     flexDirection: "row",
     justifyContent: "space-between",
   },
