@@ -12,7 +12,6 @@ import {
 import { useState } from "react";
 import { AntDesign } from "@expo/vector-icons";
 import Images from "./assets/index.js";
-import { scale } from "./fontUtil.js";
 
 export default function App() {
   const [currPlayers, setPlayers] = useState(9);
@@ -27,9 +26,9 @@ export default function App() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={[styles.header, { width: imgWidth }]}>
+      <View style={[styles.header, { width: imgWidth * 1.5 }]}>
         <View style={styles.positionContainer}>
-          <Text style={{ fontSize: scale(15) }}> {positionText} </Text>
+          <Text style={{ fontSize: 15 }}> {positionText} </Text>
         </View>
         <Pressable
           onPress={() => {
@@ -42,15 +41,15 @@ export default function App() {
         >
           <AntDesign name="minuscircle" size={36} color="black" />
         </Pressable>
-        <Text style={{ fontSize: scale(30) }}> {currPlayers} </Text>
+        <Text style={{ fontSize: 30 }}> {currPlayers} </Text>
         <Pressable onPress={() => setPlayers(Math.min(currPlayers + 1, 9))}>
           <AntDesign name="pluscircle" size={36} color="black" />
         </Pressable>
         <View style={styles.positionContainer}>
-          <Text style={{ fontSize: scale(15) }}> {stageText} </Text>
+          <Text style={{ fontSize: 15 }}> {stageText} </Text>
         </View>
       </View>
-      <SafeAreaView style={[styles.secondHeader, { width: imgWidth }]}>
+      <SafeAreaView style={[styles.secondHeader, { width: imgWidth * 1.5 }]}>
         <Pressable
           style={styles.buttonStyle}
           onPress={() => {
