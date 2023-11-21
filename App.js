@@ -40,11 +40,11 @@ export default function App() {
             }
           }}
         >
-          <AntDesign name="minuscircle" size={scale(36)} color="black" />
+          <AntDesign name="minuscircle" size={36} color="black" />
         </Pressable>
         <Text style={{ fontSize: scale(30) }}> {currPlayers} </Text>
         <Pressable onPress={() => setPlayers(Math.min(currPlayers + 1, 9))}>
-          <AntDesign name="pluscircle" size={scale(36)} color="black" />
+          <AntDesign name="pluscircle" size={36} color="black" />
         </Pressable>
         <View style={styles.positionContainer}>
           <Text style={{ fontSize: scale(15) }}> {stageText} </Text>
@@ -112,6 +112,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     marginBottom: 5,
+    alignItems: "center",
   },
   positionContainer: {
     width: "25%",
