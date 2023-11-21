@@ -7,3 +7,4 @@ Source code is available here, but the app is also continuously deployed at [htt
 ## Acknowledgements
 
 - [Jonathan Little's Preflop Ranges](https://poker-coaching.s3.amazonaws.com/tools/preflop-charts/full-preflop-charts.pdf)
+- [Poker chip icons created by Freepik - Flaticon](https://www.flaticon.com/free-icons/poker-chip)
