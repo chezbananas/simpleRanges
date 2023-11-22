@@ -7,7 +7,8 @@ import {
   Image,
   Dimensions,
   ScrollView,
-  PixelRatio,
+  TouchableOpacity,
+  Linking,
 } from "react-native";
 import { useState } from "react";
 import { AntDesign } from "@expo/vector-icons";
@@ -95,6 +96,13 @@ export default function App() {
           style={{ width: imgWidth, height: imgHeight }}
         />
       </ScrollView>
+      <View style={styles.footer}>
+        <TouchableOpacity
+          onPress={() => Linking.openURL("https://chezbananas.github.io/")}
+        >
+          <Text> Made by Everett Lee</Text>
+        </TouchableOpacity>
+      </View>
     </SafeAreaView>
   );
 }
@@ -134,5 +142,12 @@ const styles = StyleSheet.create({
     textAlign: "center",
     alignItems: "center",
     width: "23%",
+  },
+  footer: {
+    backgroundColor: "#cccccc",
+    width: "100%",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
   },
 });
