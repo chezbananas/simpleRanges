@@ -12,7 +12,7 @@ import {
 } from "react-native";
 import { useState } from "react";
 import { AntDesign } from "@expo/vector-icons";
-import Images from "./assets/index.js";
+import Images from "../assets/index.js";
 
 export default function App() {
   const [currPlayers, setPlayers] = useState(9);
