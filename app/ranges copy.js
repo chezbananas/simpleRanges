@@ -13,7 +13,6 @@ import {
 import { useState } from "react";
 import { AntDesign } from "@expo/vector-icons";
 import Images from "../assets/index.js";
-import { Button, ThemeProvider } from "react-native-paper";
 
 export default function App() {
   const [currPlayers, setPlayers] = useState(9);
@@ -52,8 +51,8 @@ export default function App() {
         </View>
       </View>
       <SafeAreaView style={[styles.secondHeader, { width: imgWidth * 1.05 }]}>
-        <Button
-          mode="contained"
+        <Pressable
+          style={styles.buttonStyle}
           onPress={() => {
             let newPos = currPosition - 1;
             if (newPos == 0) {
@@ -63,22 +62,22 @@ export default function App() {
             setStage(0);
           }}
         >
-          <Text style={styles.buttonText}> Pos- </Text>
-        </Button>
-        <Button
-          mode="contained"
+          <Text style={styles.buttonText}> Prev Position </Text>
+        </Pressable>
+        <Pressable
+          style={styles.buttonStyle}
           onPress={() => setStage(Math.max(currStage - 1, 0))}
         >
-          <Text style={styles.buttonText}> Stage-</Text>
-        </Button>
-        <Button
-          mode="contained"
+          <Text style={styles.buttonText}> Prev Stage </Text>
+        </Pressable>
+        <Pressable
+          style={styles.buttonStyle}
           onPress={() => setStage(Math.min(currStage + 1, maxStage))}
         >
-          <Text style={styles.buttonText}> Stage+ </Text>
-        </Button>
-        <Button
-          mode="contained"
+          <Text style={styles.buttonText}> Next Stage </Text>
+        </Pressable>
+        <Pressable
+          style={styles.buttonStyle}
           onPress={() => {
             let newPos = currPosition + 1;
             if (newPos == currPlayers + 1) {
@@ -88,8 +87,8 @@ export default function App() {
             setStage(0);
           }}
         >
-          <Text style={styles.buttonText}>Pos+</Text>
-        </Button>
+          <Text style={styles.buttonText}>Next Position</Text>
+        </Pressable>
       </SafeAreaView>
       <ScrollView>
         <Image

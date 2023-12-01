@@ -7,13 +7,13 @@ import {
   Image,
   Dimensions,
   ScrollView,
-  TouchableOpacity,
   Linking,
 } from "react-native";
 import { useState } from "react";
 import { AntDesign } from "@expo/vector-icons";
 import Images from "../assets/index.js";
 import { Link, useLocalSearchParams } from "expo-router";
+import { Button, ThemeProvider } from "react-native-paper";
 
 export default function App() {
   return (
@@ -24,7 +24,19 @@ export default function App() {
         }}
         asChild
       >
-        <Text> Hi </Text>
+        <Button mode="contained">
+          <Text style={styles.bigText}>Ranges</Text>
+        </Button>
+      </Link>
+      <Link
+        href={{
+          pathname: "./randomizer",
+        }}
+        asChild
+      >
+        <Button style={styles.mainButtons} mode="contained">
+          <Text style={styles.bigText}>Randomizer</Text>
+        </Button>
       </Link>
     </SafeAreaView>
   );
@@ -38,39 +50,8 @@ const styles = StyleSheet.create({
     padding: 8,
     alignItems: "center",
   },
-  header: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    marginBottom: 5,
-    alignItems: "center",
-  },
-  positionContainer: {
-    width: "25%",
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  secondHeader: {
-    height: "5%",
-    flexDirection: "row",
-    justifyContent: "space-between",
-  },
-  buttonText: {
-    color: "white",
-  },
-  buttonStyle: {
-    backgroundColor: "green",
-    borderRadius: "25%",
-    justifyContent: "center",
-    textAlign: "center",
-    alignItems: "center",
-    width: "23%",
-  },
-  footer: {
-    backgroundColor: "#cccccc",
-    width: "100%",
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center",
+  mainButtons: {},
+  bigText: {
+    fontSize: 50,
   },
 });
