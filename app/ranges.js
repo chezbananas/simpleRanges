@@ -97,13 +97,13 @@ export default function App() {
           style={{ width: imgWidth, height: imgHeight }}
         />
       </ScrollView>
-      <View style={styles.footer}>
+      {/* <View style={styles.footer}>
         <TouchableOpacity
           onPress={() => Linking.openURL("https://chezbananas.github.io/")}
         >
           <Text> Made by Everett Lee</Text>
         </TouchableOpacity>
-      </View>
+      </View> */}
     </SafeAreaView>
   );
 }

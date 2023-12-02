@@ -14,6 +14,7 @@ import { Button, DataTable } from "react-native-paper";
 
 export default function App() {
   const [num, setNum] = useState(null);
+  const [inPosition, setPosition] = useState(false);
 
   const getRandomNumber = async () => {
     try {
@@ -27,9 +28,92 @@ export default function App() {
     }
   };
 
+  let table = null;
+  let posText = null;
+  if (inPosition) {
+    posText = "In Position";
+    table = (
+      <DataTable>
+        <DataTable.Header style={styles.head}>
+          <DataTable.Title style={styles.scenario}>Scenario</DataTable.Title>
+          <DataTable.Title>Frequency</DataTable.Title>
+          <DataTable.Title>Size</DataTable.Title>
+        </DataTable.Header>
+        <DataTable.Row style={styles.row}>
+          <DataTable.Cell style={styles.scenario}>
+            High Paired/Double Broadway
+          </DataTable.Cell>
+          <DataTable.Cell>70-100% </DataTable.Cell>
+          <DataTable.Cell>25-33% </DataTable.Cell>
+        </DataTable.Row>
+        <DataTable.Row style={styles.row}>
+          <DataTable.Cell style={styles.scenario}>
+            Single Broadway/A High
+          </DataTable.Cell>
+          <DataTable.Cell>60-80%</DataTable.Cell>
+          <DataTable.Cell>33-50%</DataTable.Cell>
+        </DataTable.Row>
+        <DataTable.Row style={styles.row}>
+          <DataTable.Cell style={styles.scenario}>
+            Middling 2-Connected
+          </DataTable.Cell>
+          <DataTable.Cell>40-50%</DataTable.Cell>
+          <DataTable.Cell>50-75%</DataTable.Cell>
+        </DataTable.Row>
+        <DataTable.Row style={styles.row}>
+          <DataTable.Cell style={styles.scenario}>
+            Low Fully Connected
+          </DataTable.Cell>
+          <DataTable.Cell>0-20%</DataTable.Cell>
+          <DataTable.Cell>50-75%</DataTable.Cell>
+        </DataTable.Row>
+      </DataTable>
+    );
+  } else {
+    posText = "Out of Position";
+    table = (
+      <DataTable>
+        <DataTable.Header style={styles.head}>
+          <DataTable.Title style={styles.scenario}>Scenario</DataTable.Title>
+          <DataTable.Title>Frequency</DataTable.Title>
+          <DataTable.Title>Size</DataTable.Title>
+        </DataTable.Header>
+        <DataTable.Row style={styles.row}>
+          <DataTable.Cell style={styles.scenario}>
+            High Paired/Double Broadway
+          </DataTable.Cell>
+          <DataTable.Cell>50-70% </DataTable.Cell>
+          <DataTable.Cell>30-50% </DataTable.Cell>
+        </DataTable.Row>
+        <DataTable.Row style={styles.row}>
+          <DataTable.Cell style={styles.scenario}>
+            Single Broadway/A High
+          </DataTable.Cell>
+          <DataTable.Cell>25-35%</DataTable.Cell>
+          <DataTable.Cell>40-70%</DataTable.Cell>
+        </DataTable.Row>
+        <DataTable.Row style={styles.row}>
+          <DataTable.Cell style={styles.scenario}>
+            Middling/Low Boards
+          </DataTable.Cell>
+          <DataTable.Cell>0% </DataTable.Cell>
+          <DataTable.Cell>-- </DataTable.Cell>
+        </DataTable.Row>
+      </DataTable>
+    );
+  }
+
   useEffect(() => {
     getRandomNumber();
   }, []);
+
+  function flipState() {
+    if (inPosition) {
+      setPosition(false);
+    } else {
+      setPosition(true);
+    }
+  }
 
   return (
     <SafeAreaView style={styles.container}>
@@ -37,27 +121,12 @@ export default function App() {
       <Button mode="contained" onPress={getRandomNumber}>
         <Text style={styles.bigText}>New number</Text>
       </Button>
-      <Text style={styles.medText}> Common Frequencies: </Text>
-      <View style={styles.freqContainer}>
-        <DataTable>
-          <DataTable.Header style={styles.head}>
-            <DataTable.Title>Scenario</DataTable.Title>
-            <DataTable.Title>Frequency</DataTable.Title>
-          </DataTable.Header>
-          <DataTable.Row style={styles.row}>
-            <DataTable.Cell>IP CBet, Advantage</DataTable.Cell>
-            <DataTable.Cell>nabendu@gmail.com</DataTable.Cell>
-          </DataTable.Row>
-          <DataTable.Row style={styles.row}>
-            <DataTable.Cell>Shikha</DataTable.Cell>
-            <DataTable.Cell>shikha@gmail.com</DataTable.Cell>
-          </DataTable.Row>
-          <DataTable.Row style={styles.row}>
-            <DataTable.Cell>Hriday</DataTable.Cell>
-            <DataTable.Cell>hriday@gmail.com</DataTable.Cell>
-          </DataTable.Row>
-        </DataTable>
-      </View>
+
+      <Button mode="contained" onPress={flipState}>
+        <Text style={styles.bigText}>Flip Position</Text>
+      </Button>
+      <Text style={styles.medText}> Common CBet Frequencies {posText}: </Text>
+      <View style={styles.freqContainer}>{table}</View>
     </SafeAreaView>
   );
 }
@@ -77,8 +146,11 @@ const styles = StyleSheet.create({
   },
   head: {},
   row: {},
+  scenario: {
+    flex: 3,
+  },
   medText: {
-    fontSize: 30,
+    fontSize: 20,
   },
   bigText: {
     fontSize: 50,

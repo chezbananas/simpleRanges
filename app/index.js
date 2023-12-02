@@ -6,7 +6,7 @@ import {
   Pressable,
   Image,
   Dimensions,
-  ScrollView,
+  ScrollView, 
   Linking,
 } from "react-native";
 import { useState } from "react";
