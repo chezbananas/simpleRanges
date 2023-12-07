@@ -1,16 +1,5 @@
-import {
-  Text,
-  SafeAreaView,
-  View,
-  StyleSheet,
-  Pressable,
-  Image,
-  Dimensions,
-  ScrollView,
-  Linking,
-} from "react-native";
+import { Text, SafeAreaView, StyleSheet, Image } from "react-native";
 import Images from "../assets/index.js";
-import { Link } from "expo-router";
 import { Button } from "react-native-paper";
 import { Stack, useNavigation } from "expo-router";
 

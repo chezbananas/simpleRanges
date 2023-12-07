@@ -7,8 +7,6 @@ import {
   Image,
   Dimensions,
   ScrollView,
-  TouchableOpacity,
-  Linking,
 } from "react-native";
 import { useState } from "react";
 import { AntDesign } from "@expo/vector-icons";
