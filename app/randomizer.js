@@ -1,16 +1,7 @@
 import { useState, useEffect } from "react";
-import {
-  Text,
-  SafeAreaView,
-  StyleSheet,
-  View,
-  Pressable,
-  Image,
-  Dimensions,
-  ScrollView,
-  Linking,
-} from "react-native";
+import { Text, SafeAreaView, StyleSheet, View, Alert } from "react-native";
 import { Button, DataTable } from "react-native-paper";
+import { Stack } from "expo-router";
 
 export default function App() {
   const [num, setNum] = useState(null);
@@ -25,6 +16,10 @@ export default function App() {
       setNum(data[0]);
     } catch (error) {
       console.error("Error fetching random number:", error);
+      Alert.alert(
+        "Error Fetching Random Number",
+        "Check your internet connection and try again."
+      );
     }
   };
 
@@ -117,16 +112,28 @@ export default function App() {
 
   return (
     <SafeAreaView style={styles.container}>
+      <Stack.Screen
+        options={{
+          title: "Randomizer",
+        }}
+      />
       <Text style={styles.massiveText}>{num}</Text>
-      <Button mode="contained" onPress={getRandomNumber}>
-        <Text style={styles.bigText}>New number</Text>
+      <Button mode="contained" onPress={getRandomNumber} color="#B8CC9B">
+        <Text style={styles.bigText}>New Number</Text>
       </Button>
 
-      <Button mode="contained" onPress={flipState}>
+      <Button
+        mode="contained"
+        onPress={flipState}
+        style={{ marginTop: 35 }}
+        color="#84A3A5"
+      >
         <Text style={styles.bigText}>Flip Position</Text>
       </Button>
-      <Text style={styles.medText}> Common CBet Frequencies {posText}: </Text>
-      <View style={styles.freqContainer}>{table}</View>
+      <View style={styles.freqContainer}>
+        <Text style={styles.medText}> Common CBet Frequencies {posText}: </Text>
+        <View style={styles.tableContainer}>{table}</View>
+      </View>
     </SafeAreaView>
   );
 }
@@ -141,8 +148,15 @@ const styles = StyleSheet.create({
   },
   freqContainer: {
     width: "100%",
+    height: "40%",
+  },
+  tableContainer: {
+    width: "100%",
     flexDirection: "row",
     justifyContent: "space-evenly",
+  },
+  randButton: {
+    color: "red",
   },
   head: {},
   row: {},

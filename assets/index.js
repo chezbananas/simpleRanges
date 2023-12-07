@@ -68,6 +68,8 @@ const Images = {
     pos: "UTG",
     stages: ["RFI", "RFI vs 3Bet"],
   },
+  cards: require("./cards.png"),
+  dice: require("./dice.png"),
 };
 
 export default Images;

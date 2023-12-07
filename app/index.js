@@ -6,38 +6,45 @@ import {
   Pressable,
   Image,
   Dimensions,
-  ScrollView, 
+  ScrollView,
   Linking,
 } from "react-native";
-import { useState } from "react";
-import { AntDesign } from "@expo/vector-icons";
 import Images from "../assets/index.js";
-import { Link, useLocalSearchParams } from "expo-router";
-import { Button, ThemeProvider } from "react-native-paper";
+import { Link } from "expo-router";
+import { Button } from "react-native-paper";
+import { Stack, useNavigation } from "expo-router";
 
 export default function App() {
+  const navigation = useNavigation();
+
+  const navigateToRanges = () => {
+    navigation.navigate("ranges");
+  };
+
+  const navigateToRandomizer = () => {
+    navigation.navigate("randomizer");
+  };
+
   return (
     <SafeAreaView style={styles.container}>
-      <Link
-        href={{
-          pathname: "./ranges",
+      <Stack.Screen
+        options={{
+          headerShown: false,
         }}
-        asChild
+      />
+      <Image source={Images.cards} style={styles.icons} />
+      <Button mode="contained" color="#B8CC9B" onPress={navigateToRanges}>
+        <Text style={styles.bigText}>Ranges</Text>
+      </Button>
+      <Image source={Images.dice} style={styles.icons} />
+      <Button
+        style={styles.mainButtons}
+        mode="contained"
+        color="#738499"
+        onPress={navigateToRandomizer}
       >
-        <Button mode="contained">
-          <Text style={styles.bigText}>Ranges</Text>
-        </Button>
-      </Link>
-      <Link
-        href={{
-          pathname: "./randomizer",
-        }}
-        asChild
-      >
-        <Button style={styles.mainButtons} mode="contained">
-          <Text style={styles.bigText}>Randomizer</Text>
-        </Button>
-      </Link>
+        <Text style={styles.bigText}>Randomizer</Text>
+      </Button>
     </SafeAreaView>
   );
 }
@@ -50,7 +57,12 @@ const styles = StyleSheet.create({
     padding: 8,
     alignItems: "center",
   },
-  mainButtons: {},
+  icons: {
+    width: "50%",
+    height: "25%",
+    margin: "5%",
+    resizeMode: "contain",
+  },
   bigText: {
     fontSize: 50,
   },

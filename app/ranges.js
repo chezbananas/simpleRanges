@@ -13,7 +13,8 @@ import {
 import { useState } from "react";
 import { AntDesign } from "@expo/vector-icons";
 import Images from "../assets/index.js";
-import { Button, ThemeProvider } from "react-native-paper";
+import { Button } from "react-native-paper";
+import { Stack } from "expo-router";
 
 export default function App() {
   const [currPlayers, setPlayers] = useState(9);
@@ -28,6 +29,11 @@ export default function App() {
 
   return (
     <SafeAreaView style={styles.container}>
+      <Stack.Screen
+        options={{
+          title: "Range Navigator",
+        }}
+      />
       <View style={[styles.header, { width: imgWidth * 1.05 }]}>
         <View style={styles.positionContainer}>
           <Text style={{ fontSize: 15 }}> {positionText} </Text>
@@ -41,11 +47,11 @@ export default function App() {
             }
           }}
         >
-          <AntDesign name="minuscircle" size={36} color="black" />
+          <AntDesign name="minuscircle" size={32} color="black" />
         </Pressable>
         <Text style={{ fontSize: 30 }}> {currPlayers} </Text>
         <Pressable onPress={() => setPlayers(Math.min(currPlayers + 1, 9))}>
-          <AntDesign name="pluscircle" size={36} color="black" />
+          <AntDesign name="pluscircle" size={32} color="black" />
         </Pressable>
         <View style={styles.positionContainer}>
           <Text style={{ fontSize: 15 }}> {stageText} </Text>
@@ -54,6 +60,7 @@ export default function App() {
       <SafeAreaView style={[styles.secondHeader, { width: imgWidth * 1.05 }]}>
         <Button
           mode="contained"
+          color="#E6D9AE"
           onPress={() => {
             let newPos = currPosition - 1;
             if (newPos == 0) {
@@ -63,22 +70,28 @@ export default function App() {
             setStage(0);
           }}
         >
-          <Text style={styles.buttonText}> Pos- </Text>
+          <AntDesign name="left" />
+          <Text style={styles.buttonText}> Pos </Text>
         </Button>
         <Button
           mode="contained"
+          color="#B8CC9B"
           onPress={() => setStage(Math.max(currStage - 1, 0))}
         >
-          <Text style={styles.buttonText}> Stage-</Text>
+          <AntDesign name="left" />
+          <Text style={styles.buttonText}> Stage</Text>
         </Button>
         <Button
           mode="contained"
+          color="#738499"
           onPress={() => setStage(Math.min(currStage + 1, maxStage))}
         >
-          <Text style={styles.buttonText}> Stage+ </Text>
+          <Text style={styles.buttonText}> Stage </Text>
+          <AntDesign name="right" />
         </Button>
         <Button
           mode="contained"
+          color="#84A3A5"
           onPress={() => {
             let newPos = currPosition + 1;
             if (newPos == currPlayers + 1) {
@@ -88,7 +101,8 @@ export default function App() {
             setStage(0);
           }}
         >
-          <Text style={styles.buttonText}>Pos+</Text>
+          <Text style={styles.buttonText}>Pos</Text>
+          <AntDesign name="right" />
         </Button>
       </SafeAreaView>
       <ScrollView>
@@ -97,13 +111,6 @@ export default function App() {
           style={{ width: imgWidth, height: imgHeight }}
         />
       </ScrollView>
-      {/* <View style={styles.footer}>
-        <TouchableOpacity
-          onPress={() => Linking.openURL("https://chezbananas.github.io/")}
-        >
-          <Text> Made by Everett Lee</Text>
-        </TouchableOpacity>
-      </View> */}
     </SafeAreaView>
   );
 }
@@ -124,6 +131,7 @@ const styles = StyleSheet.create({
   },
   positionContainer: {
     width: "25%",
+    marginTop: "2%",
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
@@ -134,15 +142,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   buttonText: {
-    color: "white",
-  },
-  buttonStyle: {
-    backgroundColor: "green",
-    borderRadius: "25%",
-    justifyContent: "center",
-    textAlign: "center",
-    alignItems: "center",
-    width: "23%",
+    color: "black",
   },
   footer: {
     backgroundColor: "#cccccc",
