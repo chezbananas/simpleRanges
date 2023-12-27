@@ -29,7 +29,7 @@ export default function App() {
     <SafeAreaView style={styles.container}>
       <Stack.Screen
         options={{
-          title: "Range Navigator",
+          headerShown: false,
         }}
       />
       <View style={[styles.header, { width: imgWidth * 1.05 }]}>
