@@ -1,39 +1,114 @@
-import { Text, SafeAreaView, StyleSheet, Image } from "react-native";
+import {
+  Text,
+  SafeAreaView,
+  View,
+  StyleSheet,
+  Pressable,
+  Image,
+  Dimensions,
+  ScrollView,
+} from "react-native";
+import { useState } from "react";
+import { AntDesign } from "@expo/vector-icons";
 import Images from "../assets/index.js";
 import { Button } from "react-native-paper";
-import { Stack, useNavigation } from "expo-router";
+import { Stack } from "expo-router";
 
 export default function App() {
-  const navigation = useNavigation();
-
-  const navigateToRanges = () => {
-    navigation.navigate("ranges");
-  };
-
-  const navigateToRandomizer = () => {
-    navigation.navigate("randomizer");
-  };
+  const [currPlayers, setPlayers] = useState(9);
+  const [currPosition, setPosition] = useState(1);
+  const [currStage, setStage] = useState(0);
+  let stageText = Images[currPosition]["stages"][currStage];
+  let positionText = Images[currPosition]["pos"];
+  const maxStage = Object.keys(Images[currPosition]).length - 3;
+  let currImage = Images[currPosition][currStage];
+  const imgWidth = Math.min(Dimensions.get("window").width * 0.9, 600);
+  const imgHeight = imgWidth * 2.84; // aspect ratio for all images
 
   return (
     <SafeAreaView style={styles.container}>
       <Stack.Screen
         options={{
-          headerShown: false,
+          title: "Range Navigator",
         }}
       />
-      <Image source={Images.cards} style={styles.icons} />
-      <Button mode="contained" color="#B8CC9B" onPress={navigateToRanges}>
-        <Text style={styles.bigText}>Ranges</Text>
-      </Button>
-      <Image source={Images.dice} style={styles.icons} />
-      <Button
-        style={styles.mainButtons}
-        mode="contained"
-        color="#738499"
-        onPress={navigateToRandomizer}
-      >
-        <Text style={styles.bigText}>Randomizer</Text>
-      </Button>
+      <View style={[styles.header, { width: imgWidth * 1.05 }]}>
+        <View style={styles.positionContainer}>
+          <Text style={{ fontSize: 15 }}> {positionText} </Text>
+        </View>
+        <Pressable
+          onPress={() => {
+            const newPlayers = Math.max(currPlayers - 1, 2);
+            setPlayers(newPlayers);
+            if (newPlayers < currPosition) {
+              setPosition(newPlayers);
+            }
+          }}
+        >
+          <AntDesign name="minuscircle" size={32} color="black" />
+        </Pressable>
+        <Text style={{ fontSize: 30 }}> {currPlayers} </Text>
+        <Pressable onPress={() => setPlayers(Math.min(currPlayers + 1, 9))}>
+          <AntDesign name="pluscircle" size={32} color="black" />
+        </Pressable>
+        <View style={styles.positionContainer}>
+          <Text style={{ fontSize: 15 }}> {stageText} </Text>
+        </View>
+      </View>
+      <SafeAreaView style={[styles.secondHeader, { width: imgWidth * 1.05 }]}>
+        <Button
+          mode="contained"
+          color="#E6D9AE"
+          onPress={() => {
+            let newPos = currPosition - 1;
+            if (newPos == 0) {
+              newPos = currPlayers;
+            }
+            setPosition(newPos);
+            setStage(0);
+          }}
+        >
+          <AntDesign name="left" />
+          <Text style={styles.buttonText}> Pos </Text>
+        </Button>
+        <Button
+          mode="contained"
+          color="#B8CC9B"
+          onPress={() => setStage(Math.max(currStage - 1, 0))}
+        >
+          <AntDesign name="left" />
+          <Text style={styles.buttonText}> Stage</Text>
+        </Button>
+        <Button
+          mode="contained"
+          color="#738499"
+          onPress={() => setStage(Math.min(currStage + 1, maxStage))}
+        >
+          <Text style={styles.buttonText}> Stage </Text>
+          <AntDesign name="right" />
+        </Button>
+        <Button
+          mode="contained"
+          color="#84A3A5"
+          onPress={() => {
+            let newPos = currPosition + 1;
+            if (newPos == currPlayers + 1) {
+              newPos = 1;
+            }
+            setPosition(newPos);
+            setStage(0);
+          }}
+        >
+          <Text style={styles.buttonText}>Pos</Text>
+          <AntDesign name="right" />
+        </Button>
+      </SafeAreaView>
+      <ScrollView>
+        <Image
+          source={currImage}
+          style={{ width: imgWidth, height: imgHeight }}
+        />
+      </ScrollView>
     </SafeAreaView>
   );
 }
@@ -46,13 +121,32 @@ const styles = StyleSheet.create({
     padding: 8,
     alignItems: "center",
   },
-  icons: {
-    width: "50%",
-    height: "25%",
-    margin: "5%",
-    resizeMode: "contain",
+  header: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginBottom: 5,
+    alignItems: "center",
   },
-  bigText: {
-    fontSize: 50,
+  positionContainer: {
+    width: "25%",
+    marginTop: "2%",
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  secondHeader: {
+    height: "5%",
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+  buttonText: {
+    color: "black",
+  },
+  footer: {
+    backgroundColor: "#cccccc",
+    width: "100%",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
   },
 });
