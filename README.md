@@ -2,7 +2,7 @@
 
 SimpleRanges is a small webapp I made to more easily browse preflop hand ranges for Texas No Limit Hold'em Poker.
 
-Source code is available here, but the app is also continuously deployed (with the random number API broken) at [https://simple-ranges.netlify.app/](https://simple-ranges.netlify.app/).
+Source code is available here, but the app is also continuously deployed at [https://simple-ranges.netlify.app/](https://simple-ranges.netlify.app/).
 
 ## Acknowledgements
 
